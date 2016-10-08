@@ -1,4 +1,7 @@
 # file: role/install-pgbouncer/defaults/main.yml
+el_version: 7
+postgresql_version: 9.4
+postgresql_contrib: yes
 
 # Basic settings
 pgbouncer_ini: /etc/pgbouncer/pgbouncer.ini
@@ -22,7 +25,7 @@ pgbouncer_allowed_users:
  - vpupkin
 
 # pgbouncer.ini settings
-pgbouncer_logfile: /var/log/pgbouncer.log
+pgbouncer_logfile: /var/log/pgbouncer/pgbouncer.log
 pgbouncer_pidfile: /var/run/pgbouncer/pgbouncer.pid
 pgbouncer_listen_addr: '*'
 pgbouncer_listen_port: 6432
