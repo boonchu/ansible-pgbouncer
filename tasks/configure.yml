@@ -24,11 +24,11 @@
     group: "{{ pgbouncer_admin_group }}"
     mode: 0660
   
-- name: "Stage 2: add users into userlist.txt"
+- name: "Stage 2: add users {{ pgbouncer_admin_user }}:{{ pgbouncer_admin_group }} {{ pgbouncer_auth_file }}"
   sudo: yes
   sudo_user: postgres
-  shell: psql -qAtXF' ' -c "select rolname,rolpassword from pg_authid where rolname = '{{ item }}'" |sed -e 's/^/\"/' -e 's/$/\"/' -e 's/ /\" \"/' >> {{ pgbouncer_auth_file }}
-  with_items: pgbouncer_allowed_users
+  shell: /bin/echo '"{{ item }}" "{{ item }}"' >> {{ pgbouncer_auth_file }}
+  with_items: "{{ pgbouncer_allowed_users }}"
 
 - name: "Stage 2: fix permissions userlist.txt"
   file: 
